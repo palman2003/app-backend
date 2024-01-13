@@ -1,7 +1,8 @@
 const express=require('express');
 require('dotenv').config();
-const content=require('./routes/content');
-const quiz=require('./routes/quiz')
+const bodyParser=require('body-parser');
+const jwt=require('jsonwebtoken');
+const user=require('./routes/user');
 const mongoose=require("mongoose");
 const app=express();
 
@@ -20,10 +21,12 @@ mongoose.connect(process.env.MONGO_URI)
         console.log("error");
     })
 
-//route configuration for content
-app.use('/v1/api/content',content);
+//route configuration for user login
+app.use('/v1/api',user);
 
-//route configuration for quiz
-app.use('/v1/api/quiz',quiz);
+//route configuration for password reset
+//app.use('/v1/api/reset',quiz);
+
+
 
 
